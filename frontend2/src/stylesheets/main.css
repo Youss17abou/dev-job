@@ -1,0 +1,223 @@
+/* #containerHomePage{
+    padding-top: 10%;
+    padding-bottom: 15%;
+    height: 100%;
+} */
+
+#nav{
+    background-color: #859dfb;
+}
+
+a {
+    color: white;
+}
+
+/* .sloganText1{
+    font-size: 400%;
+    font-weight: bold;
+    margin-bottom: 4%;
+}
+
+.sloganText2{
+    margin-bottom: 4%;
+} */
+
+#signUpButton{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+    height: 50px;
+    font-size: 200%;
+    text-align: center;
+    background: rgba(89, 160, 207, 0.536);
+    border: none;
+}
+/*CompanyPage*/
+.descCompany {
+    background-color: gray;
+    border-radius:10px;
+    padding: 20px;
+    
+}
+
+
+.homePageDiv{
+    background-color: #d0d7f4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150vh;
+    color:white
+}
+/* register page */
+
+#registerFormDevelopper{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 25vh;
+    width: 40vh;
+    border-radius: 12px;
+
+}
+/*temporaire */
+
+
+h1 {
+    color: white;
+   
+}
+
+h2 {
+    color: white;
+}
+
+#slogan {
+    font-family: Brush Script MT;
+    color:#3c013c ;
+}
+
+#btn-register {
+    color: white;
+
+}
+
+#team {
+    background-image: url(../img/team.jpg);
+    background-size: cover;
+}
+
+#who{
+    background-color: #d0d7f4;
+
+}
+
+#whoare{
+    color: black;
+}
+
+#homeOffer{
+    background-color:#859dfb ;
+    border-radius: 2rem;
+    margin-right: 15px;
+}
+
+#equipe{
+    background-color: #859dfb;
+}
+
+#contact{
+    background-color: #475cad;
+    color: white;
+}
+
+
+main{
+    background-color: #c8d3ff;
+}
+
+#registerFormDevelopper{
+    opacity: 0.8;
+}
+
+.white{
+    background-color: rgba(248, 248, 248, 0.635);
+}
+h3 {
+    color: rgb(215, 215, 215);
+}
+#contreg{
+    padding-top: 10%;
+    padding-bottom: 15%;
+    height: 100%;
+    background-size: cover;
+}
+
+
+#part1{
+    background-image: url(../img/front_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;   
+}
+#idImageDevPage{
+    background-image: url(../img/Logo.png);
+    margin: 0px;
+    padding: 0px;
+}
+#part1a{
+    background-color: #3c013c;
+}
+
+.swiper {
+    height: 500px;
+    
+  }
+  .swiper-slide{
+        background: #475cad;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: white;
+        padding: 20%;
+    }
+  
+#inputDevPage {
+    background-color: #0563af;
+    border-radius: 3px;
+    padding: 5 px;
+margin-top: 4px;
+margin-bottom: 4px;
+border: 0px;
+width: 100px;
+height: 40px;
+}
+
+#inputDevPage:hover {
+    background-color: rgba(104, 110, 116, 0.849);
+
+    }
+
+
+    
+    
+      
+      .box select {
+        border-radius: 3px;
+        background-color: #0563af;
+        color: white;
+        padding: 12px;
+        width: 130px;
+        border: none;
+        font-size: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+      }
+      
+      .box::before {
+        content: "\f13a";
+        font-family: FontAwesome;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20%;
+        height: 100%;
+        text-align:center;
+        font-size: 28px;
+        line-height: 45px;
+        color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+      
+      .box:hover::before {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .box select option {
+        padding: 30px;
+      }
