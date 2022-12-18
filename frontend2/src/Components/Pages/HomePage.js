@@ -1,17 +1,30 @@
 import { clearPage } from '../../utils/render';
 import Navigate from '../Router/Navigate';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { isAuthenticated, isDev } from '../../utils/auths';
 
 
 const renderHomePage = () => {
   const main = document.querySelector('main');
+
+  if(isAuthenticated()){
+    if(isDev()){
+      Navigate('/jobOffers');
+      return;
+    }
+    
+    Navigate('/homePageCompany');
+    return;
+    
+  }
+
   main.innerHTML =
   `<div class="homePageDiv">
-  <div id="part1" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+  <div id="part1" class="position-relative overflow-hidden p-3 p-md-5 text-center bg-light">
       <div class="col-md-6 p-lg-5 mx-auto my-5" id="part">
           <h1 class="display-4 font-weight-normal">Trouvez un job avec DevJob </h1>
           <p class="lead font-weight-normal">Site de mise en relation entre developpeurs et entreprise.</p>
-          <small class="text-muted">Swipe dès maintenant les offres qui t'intéressent!</small>
+          <small>Swipe dès maintenant les offres qui t'intéresse!</small>
           <button class="btn btn-outline-secondary mt-1" class="text-center" id="btn-register"
               data-uri="/register type=" button">S'inscrire maintenant</button>
       </div>
@@ -23,7 +36,6 @@ const renderHomePage = () => {
       <div class="block block-inverse text-center">
           <div class="block-foreground">
               <h4 id="slogan">Par des developpeurs, pour des developpeurs.</h5>
-
           </div>
       </div>
   </div>
@@ -32,7 +44,7 @@ const renderHomePage = () => {
           <div class="my-3 py-3">
               <h2 class="display-5">Qui sommes-nous ?</h2>
               <p class="lead" id="whoare">Groupes de jeunes developpeurs en informatique de gestion, <br> rapidement
-                  le besoin de trouvez des offres nous convenant et de pouvoir y postuler facilement se fit ressentir,
+              se fit ressentir le besoin de trouvez des offres nous convenant et de pouvoir y postuler facilement ,
                   <br> 2022 le projet DevJob voit le jour</p>
           </div>
       </div>
@@ -64,9 +76,9 @@ const renderHomePage = () => {
           <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
         </svg></h2>
           <p class="lead">02/01010101</p>
-          <p class="lead">devjob@student.vinci.com</p> 
+          <p class="lead">devjob@vinci.be</p> 
       </div>
-  </footer>`; // penser à mettre adresse mail et numero fonctionnel + mettre ce lien dans les credits pour le background : Image de <a href="https://fr.freepik.com/photos-gratuite/vue-face-homme-costume-concept-hebergement-site-web_26412526.htm#page=2&query=background%20website%20IT&position=32&from_view=search&track=ais">Freepik</a>
+  </footer>`; // mettre ce lien dans les credits pour le background : Image de <a href="https://fr.freepik.com/photos-gratuite/vue-face-homme-costume-concept-hebergement-site-web_26412526.htm#page=2&query=background%20website%20IT&position=32&from_view=search&track=ais">Freepik</a>
 
 
   const part1= document.getElementById('part')

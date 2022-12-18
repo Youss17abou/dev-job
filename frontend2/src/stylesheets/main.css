@@ -1,26 +1,31 @@
-/* #containerHomePage{
-    padding-top: 10%;
-    padding-bottom: 15%;
-    height: 100%;
-} */
+/* Global */
 
-#nav{
-    background-color: #859dfb;
+main{
+    background-color: #97d7fa;
 }
 
 a {
     color: white;
 }
 
-/* .sloganText1{
-    font-size: 400%;
-    font-weight: bold;
-    margin-bottom: 4%;
+h1 {
+    color: white;
+   
 }
 
-.sloganText2{
-    margin-bottom: 4%;
-} */
+h2 {
+    color: white;
+}
+
+h3 {
+    color: rgb(215, 215, 215);
+}
+
+
+#nav{
+    background-color: #859dfb;
+}
+
 
 #signUpButton{
     display: inline-flex;
@@ -33,12 +38,22 @@ a {
     background: rgba(89, 160, 207, 0.536);
     border: none;
 }
-/*CompanyPage*/
+
 .descCompany {
-    background-color: gray;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(251, 243, 243);
     border-radius:10px;
     padding: 20px;
     
+}
+
+#sendMail{
+    color: black;
+}
+
+#sendMail:hover{
+    color: green;
 }
 
 
@@ -49,6 +64,7 @@ a {
     height: 150vh;
     color:white
 }
+
 /* register page */
 
 #registerFormDevelopper{
@@ -61,22 +77,16 @@ a {
     border-radius: 12px;
 
 }
-/*temporaire */
 
-
-h1 {
-    color: white;
-   
-}
-
-h2 {
-    color: white;
+#h2HP{
+    color: black;
 }
 
 #slogan {
-    font-family: Brush Script MT;
+    font-family: 'Courier New', Courier, monospace;
     color:#3c013c ;
 }
+
 
 #btn-register {
     color: white;
@@ -113,20 +123,37 @@ h2 {
 }
 
 
-main{
-    background-color: #c8d3ff;
-}
+
 
 #registerFormDevelopper{
-    opacity: 0.8;
+    opacity: 1;
+    margin: auto;
+    width: 100vh;
+}
+
+#registerFormCompanies{
+    opacity: 1;
+    margin: auto;
+    width: 130vh;
+
+}
+
+#to{
+    margin-top: 25px;
+}
+
+.form-check{
+    margin-top: 30px;
+}
+
+#containerDevHomePageCompany{
+    background-color: #5f87cc81;
 }
 
 .white{
     background-color: rgba(248, 248, 248, 0.635);
 }
-h3 {
-    color: rgb(215, 215, 215);
-}
+
 #contreg{
     padding-top: 10%;
     padding-bottom: 15%;
@@ -134,19 +161,34 @@ h3 {
     background-size: cover;
 }
 
+#titlePages{
+    color: white;
+}
 
 #part1{
     background-image: url(../img/front_background.jpg);
     background-size: cover;
     background-repeat: no-repeat;   
+    height: 95vh;
 }
+.h4DevPage
+{
+    color: #3f67b1;
+}
+
 #idImageDevPage{
-    background-image: url(../img/Logo.png);
-    margin: 0px;
-    padding: 0px;
+    background-image: url(../img/profil.png);
+    background-color:rgb(183, 222, 237);
+    height: 100px;
+    width: 100px;
 }
+
+#contIm{
+    background-color:rgb(183, 222, 237);
+}
+
 #part1a{
-    background-color: #3c013c;
+    background-color: #3f67b1;
 }
 
 .swiper {
@@ -154,7 +196,7 @@ h3 {
     
   }
   .swiper-slide{
-        background: #475cad;
+        background:#d0d7f4;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -164,8 +206,11 @@ h3 {
     }
   
 #inputDevPage {
-    background-color: #0563af;
-    border-radius: 3px;
+    background-color:#1635ae;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:bold;
+    color: white;
+    border-radius: 3rem;
     padding: 5 px;
 margin-top: 4px;
 margin-bottom: 4px;
@@ -175,14 +220,10 @@ height: 40px;
 }
 
 #inputDevPage:hover {
-    background-color: rgba(104, 110, 116, 0.849);
+    background-color: black;
+    color: greenyellow;
 
     }
-
-
-    
-    
-      
       .box select {
         border-radius: 3px;
         background-color: #0563af;
@@ -221,3 +262,81 @@ height: 40px;
       .box select option {
         padding: 30px;
       }
+#idLanguage{
+    
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    align-items: center;
+}
+
+#idLanguage:hover{
+    background-color:black;
+    color: greenyellow;
+}
+
+#test{
+    justify-content: center;
+    align-items: center;
+    margin-left:5%;
+}
+
+.infoDev{
+    font-family:monospace;
+}
+
+#offerForm{
+    position: relative;
+
+    width  : 70vh;
+    height : 90vh;
+    margin : 0vh 70vh 0vh 70vh;
+}
+
+.swiper-slide{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginForm{
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#CompanyInfo{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    background-color: white;
+}
+
+#dislikeMessage{
+    color:white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 10px;
+}
+#likeMessage{
+    color:white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 10px;
+}
+
+#getLikeMessage{
+    color: black;   
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 10px;
+}
+
+#getDislikeMessage{
+    color: black;   
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 10px;
+}
+
+

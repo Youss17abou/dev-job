@@ -1,74 +1,149 @@
+import Swiper, { Navigation, Keyboard, EffectCube } from 'swiper';
 import { clearPage, renderPageTitle } from '../../utils/render';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { getAuthenticatedUser } from '../../utils/auths';
+// core version + navigation, pagination modules:
 
-const HomePageDev = async () => {
-  try {
-    clearPage();
-    renderPageTitle('Home Page Dev');
+let click;
+// configure Swiper to use modules
+Swiper.use([Navigation, Keyboard, EffectCube]);
+// d'abbord afficher les offres avant d'executer le script
 
-    const AllOffers = await getAllOffersFromAPI();
+const SwipePage = async () => {
+  const AllOffers = await getAllOffersFromAPI();
+  await renderSwipePage(AllOffers);
 
-    renderAllOffers(AllOffers);
-    attachListenerToButton();
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    // console.error('HomePage::error: ', error);
-    const errorText = document.querySelector('main');
-    errorText.innerHTML = `<div class="alert alert-danger" role="alert">
-    Erreur dans le chargemnt de cette page
-    </div>`;
-  }
+  const allLikeButton = document.querySelectorAll('.iLike');
+  const allDislikeButton = document.querySelectorAll('.iDislike');
+
+  document.onclick = (b) => {
+    click = b.target;
+  };
+
+  allLikeButton.forEach((form) => {
+    form.addEventListener('submit', onLikedOffer);
+    form.addEventListener('click', () =>{
+      document.getElementById('dislikeMessage').id = 'dislikeMessage';
+      document.getElementById('likeMessage').id = 'getLikeMessage';
+      document.getElementById('getDislikeMessage').id = 'dislikeMessage';
+    })
+  });
+
+  allDislikeButton.forEach((form) => {
+    form.addEventListener('submit', onUnlikedOffer);
+    form.addEventListener('click', () =>{
+      document.getElementById('likeMessage').id = 'likeMessage';
+      document.getElementById('dislikeMessage').id = 'getDislikeMessage';
+      document.getElementById('getLikeMessage').id = 'likeMessage';
+    })
+  });
+
 };
 
-function attachListenerToButton() {
-  const buttonInterested = document.querySelector('.buttonInterested');
-  buttonInterested.addEventListener('click', (e) => {
-    e.preventDefault();
-    buttonInterested.className = 'btn btn-primary buttonInterested';
-  });
+async function renderSwipePage(AllOffers) {
+  try {
+    const head = document.querySelector('head');
+    const foot = document.querySelector('footer');
+    head.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>`;
+    foot.innerHTML += `<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>`;
+    foot.innerHTML += ``;
+    const main = document.querySelector('main');
+    const allJobOfferFromCompany = await renderAllJobOffersAsString(AllOffers);
+    
+    clearPage();
+    renderPageTitle('Offres');
+    main.innerHTML += `<!-- Slider main container -->
+  <div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    ${allJobOfferFromCompany}
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  
+  </div>`;
+
+    const swiper = new Swiper('.swiper', {
+      // Optional parameters
+      loop: true,
+      effect: 'cube',
+      grabCursor: true,
+      cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 50,
+        shadowScale: 0.3,
+      },
+      // If we need pagination
+      keyboard: {
+        enabled: true,
+      },
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // And if we need scrollbar
+    });
+    swiper.scrollbar.destroy();
+
+    swiper();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function renderAllJobOffersAsString(jobOffers) {
-  let allOffers = `
-  <div class="container">`;
-
-  jobOffers?.forEach((offer) => {
+async function renderAllJobOffersAsString(jobOffers) {
+  let allOffers = ``;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const offer of jobOffers) {
     const date = new Date(offer.upload_date);
-    allOffers += ` 
-      <h2>${offer.title}</h2>
-      <h3>Nom de l'entreprise : ${offer.company_name}</h3>
-
-      <h3>Type d'offre : ${offer.type_offer}</h3>
+    // eslint-disable-next-line no-await-in-loop
+    const language = await getAllLanguageFromOfferAPI(offer.id_offer);
+    const languageString = getLanguageAsString(language);
+   
+    allOffers += ` <div class="swiper-slide ">
+    <table class="table table-striped table-hover table-light">
+    <thead>
+      <th scope="row">${offer.title} chez ${offer.company_name} <br> 
+      Publié le ${date.toLocaleDateString()}</th>
+      <th scope="row"><div id=dislikeMessage>Vous n'êtes pas interressé par cette offre</div></th>
+      <th scope="row"><div id=likeMessage>vous aimez</div></th>
+    </thead>
       
-      <h4>Description : ${offer.description}</h4>
+      <th scope="row">${offer.type_offer} </th>
+      <th scope="row">${offer.description}</th>
+      <th scope="row">${languageString} </th> 
+      
+    </table>
 
-      <p>Publié le ${date.toLocaleDateString()}</p>
-      <div>
-                        <form method="POST">
-                        <input type="hidden" name="id_offer" value="${offer.id_offer}">
-    
-                        <button type="submit " class="btn btn-success buttonInterested">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 class="bi bi-check-lg" viewBox="0 0 16 16">
-                                <path
-                                        d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                            </svg>
-                            </svg>
+          <div>
+            <form class="iLike">
+              <input type="submit" class="btn btn-outline-success btn-lg" value="j'aime">
+              <input type="hidden" value = "${offer.id_offer}" class="id_offer">
+            </form>
+            <form class="iDislike">
+              <input type="submit" class="btn btn-outline-danger btn-lg" value="je n'aime plus">
+              <input type="hidden" value = "${offer.id_offer}" class="id_offer">
+            </form>
+          </div>
+          
+</div>
+     `;
+  }
 
-                        </button>
-
-
-                        </form>
-                    </div>
-
-     
-  <hr>  `;
-  });
-
-  allOffers += `</div>`;
-
+  console.log(allOffers);
   return allOffers;
 }
 
+// eslint-disable-next-line no-unused-vars
 function renderAllOffers(jobOffers) {
   const tablesAllOffers = renderAllJobOffersAsString(jobOffers);
   const main = document.querySelector('main');
@@ -91,4 +166,82 @@ async function getAllOffersFromAPI() {
   }
 }
 
-export default HomePageDev;
+async function getAllLanguageFromOfferAPI(idOffer) {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/jobOffers/getLanguageRequired/${idOffer}`);
+
+    if (!response.ok) throw new Error('fetch error : ', response.status, response.statusText);
+
+    const languages = await response.json();
+
+    return languages;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('HomePageDev  error: ', error);
+    throw error;
+  }
+}
+
+function getLanguageAsString(listLanguage) {
+  let languageRequired = ``;
+  listLanguage?.forEach((l) => {
+    languageRequired += `<p>${l.language}</p>`;
+  });
+
+  return languageRequired;
+}
+
+async function onLikedOffer(e) {
+  e.preventDefault();
+
+  const tab = click.parentElement.elements;
+  const offer = tab[1].value;
+  const developer = getAuthenticatedUser().id;
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      idOffer: offer,
+      idDeveloper: developer,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch(`${process.env.API_BASE_URL}/jobOffers/addToInterstedDev`, options);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  // eslint-disable-next-line no-console
+  console.log('Newly match with the developer : ', developer);
+
+}
+
+async function onUnlikedOffer(e) {
+  e.preventDefault();
+
+  const tab = click.parentElement.elements;
+  const offer = tab[1].value;
+  const developer = getAuthenticatedUser().id;
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      idOffer: offer,
+      idDeveloper: developer,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch(`${process.env.API_BASE_URL}/jobOffers/notInterestedDev`, options);
+
+  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+  // eslint-disable-next-line no-console
+  console.log('Newly unmatch with the developer : ', developer);
+}
+
+export default SwipePage;

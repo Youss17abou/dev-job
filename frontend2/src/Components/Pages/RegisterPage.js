@@ -75,16 +75,17 @@ Entreprise
      placeholder="(min. 8 caractères, 1 majuscule et 1 chiffre)"
    />
  </div>
+ <div id ="to">
  <div class="form-group">
-                                <label for="TypeDOffre">Type d'offre</label>
+                                <label for="TypeDOffre">Type d'offre que vous recherchez</label>
                                 <select id="idOffer">
                                 <option value="1">CDI</option>
                                 <option value="2">CDD</option>
                                 <option value="3">Stage</option>
                                 <option value="4">Étudiant</option>
-                                    
                                     </select>
                             </div>
+</div>
  <div class="form-check">
    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
    <label class="form-check-label" for="exampleCheck1"
@@ -109,7 +110,7 @@ Entreprise
   </div>
 
 
-  <form id="registerFormCompanie" class="white p-3 container">
+  <form id="registerFormCompanies" class="white p-3 container">
   <div class="form-group">
     <label for="Nom">Nom Entreprise</label>
     <input
@@ -227,7 +228,7 @@ const renderRegisterFormCompaniesPage = () => {
   clearPage();
 
   main.innerHTML += renderRegisterFormCompaniesPageAsString();
-  const form = document.getElementById('registerFormCompanie');
+  const form = document.getElementById('registerFormCompanies');
   async function onRegisterCompanie(e) {
     e.preventDefault();
     const nameCompany = document.getElementById('idNameCampanie').value;
